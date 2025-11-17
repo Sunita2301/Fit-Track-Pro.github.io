@@ -70,3 +70,5 @@ All updates via pure DOM manipulation
 All popups are custom-designed overlays
 
 Fully functional on static deployments
+link to visit our page:
+https://sunita2301.github.io/Fit-Track-Pro.github.io/
