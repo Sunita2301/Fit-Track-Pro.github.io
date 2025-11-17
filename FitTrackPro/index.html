@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitTrack Pro — Personal Fitness & Wellness Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./StarBorder.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="noise-layer" aria-hidden="true"></div>
+  <nav class="primary-nav" aria-label="Primary">
+    <button class="nav-pill" data-scroll="overview">Overview</button>
+    <button class="nav-pill" data-scroll="activity">Activity</button>
+    <button class="nav-pill" data-scroll="meals">Meals</button>
+    <button class="nav-pill" data-scroll="insights">Insights</button>
+  </nav>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">FitTrack Pro</p>
+      <h1>Personal Fitness & Wellness Dashboard</h1>
+      <p class="subtext">Track your day, craft mindful routines, and stay motivated with a single, immersive wellness hub.</p>
+      <div class="hero__actions">
+        <button class="btn primary" data-scroll="overview">Start Exploring</button>
+        <button class="btn ghost" data-scroll="insights">View Weekly Insights</button>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <article class="hero-card hero-card--primary">
+        <img
+          src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1000&q=80"
+          alt="Athlete tying shoes before a workout"
+          loading="lazy"
+        />
+        <div class="hero__badge">
+          <p>Today's Focus</p>
+          <strong>Strength & Conditioning</strong>
+        </div>
+      </article>
+      <article class="hero-card">
+        <div class="hero-card__content">
+          <p class="hero-card__eyebrow">Motivation</p>
+          <h3>“Progress, not perfection.”</h3>
+          <p class="hero-card__note">Set a micro-goal for today and celebrate the win.</p>
+        </div>
+      </article>
+      <article class="hero-card">
+        <div class="hero-card__content">
+          <p class="hero-card__eyebrow">Workout Idea</p>
+          <h3>Tabata Power</h3>
+          <p class="hero-card__note">8 rounds • 20s sprint • 10s rest • Repeat.</p>
+        </div>
+      </article>
+      <article class="hero-card">
+        <div class="hero-card__content">
+          <p class="hero-card__eyebrow">Featured Tip</p>
+          <h3>Hydration Stack</h3>
+          <p class="hero-card__note">Sip 250ml every hour to keep energy stable.</p>
+        </div>
+      </article>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview" class="section">
+      <div class="section__header">
+        <div>
+          <p class="eyebrow">Section 01</p>
+          <h2>Daily Wellness Overview</h2>
+        </div>
+        <div class="live-clock" aria-live="polite">
+          <span class="clock__label">Live Clock</span>
+          <span class="clock__time" id="liveClock">--:-- --</span>
+        </div>
+      </div>
+      <div class="wellness-grid">
+        <star-border thickness="2" color="#0ff" speed="4s">
+          <article class="card progress-card reveal" data-type="steps">
+            <div class="progress-ring" data-progress="0">
+              <span class="progress-value" id="stepsValue">0</span>
+              <span class="progress-unit">steps</span>
+            </div>
+            <div class="card__meta">
+              <h3>Steps Taken</h3>
+              <p class="goal" id="stepsGoal">Goal: 0</p>
+              <div class="progress-controls" role="group" aria-label="Adjust steps">
+                <button type="button" class="control-btn" data-metric="steps" data-step="-500">-</button>
+                <button type="button" class="control-btn" data-metric="steps" data-step="500">+</button>
+              </div>
+            </div>
+          </article>
+        </star-border>
+        <star-border thickness="2" color="#ff9b6a" speed="4s">
+          <article class="card progress-card reveal" data-type="calories">
+            <div class="progress-ring" data-progress="0">
+              <span class="progress-value" id="caloriesValue">0</span>
+              <span class="progress-unit">kcal</span>
+            </div>
+            <div class="card__meta">
+              <h3>Calories Burned</h3>
+              <p class="goal" id="caloriesGoal">Goal: 0 kcal</p>
+              <div class="progress-controls" role="group" aria-label="Adjust calories burned">
+                <button type="button" class="control-btn" data-metric="calories" data-step="-50">-</button>
+                <button type="button" class="control-btn" data-metric="calories" data-step="50">+</button>
+              </div>
+            </div>
+          </article>
+        </star-border>
+        <star-border thickness="2" color="#7fb8ff" speed="4s">
+          <article class="card progress-card reveal" data-type="water">
+            <div class="progress-ring" data-progress="0">
+              <span class="progress-value" id="waterValue">0</span>
+              <span class="progress-unit">L</span>
+            </div>
+            <div class="card__meta">
+              <h3>Water Intake</h3>
+              <p class="goal" id="waterGoal">Goal: 0 L</p>
+              <div class="progress-controls" role="group" aria-label="Adjust water intake">
+                <button type="button" class="control-btn" data-metric="water" data-step="-0.25">-</button>
+                <button type="button" class="control-btn" data-metric="water" data-step="0.25">+</button>
+              </div>
+            </div>
+          </article>
+        </star-border>
+      </div>
+    </section>
+
+    <section id="activity" class="section">
+      <div class="section__header">
+        <div>
+          <p class="eyebrow">Section 02</p>
+          <h2>Activity Log</h2>
+        </div>
+        <div class="filter-group" role="tablist" aria-label="Activity filter">
+          <button class="filter-pill active" data-filter="all">All</button>
+          <button class="filter-pill" data-filter="morning">Morning</button>
+          <button class="filter-pill" data-filter="afternoon">Afternoon</button>
+          <button class="filter-pill" data-filter="evening">Evening</button>
+        </div>
+      </div>
+      <div class="activity-layout">
+        <star-border thickness="2" color="#0ff" speed="5s">
+          <div class="card activity-list reveal" id="activityList" aria-live="polite"></div>
+        </star-border>
+        <star-border thickness="2" color="#ff9b6a" speed="4s">
+          <form class="card activity-form reveal" id="activityForm" novalidate>
+            <h3>Add Activity</h3>
+            <label>
+              Activity Name
+              <input type="text" name="name" placeholder="e.g., Evening Run" required />
+            </label>
+            <label>
+              Duration (mins)
+              <input type="number" name="duration" min="1" max="300" placeholder="45" required />
+            </label>
+            <label>
+              Calories Burned
+              <input type="number" name="calories" min="10" max="1500" placeholder="320" required />
+            </label>
+            <label>
+              Session
+              <select name="session" required>
+                <option value="">Select window</option>
+                <option value="morning">Morning</option>
+                <option value="afternoon">Afternoon</option>
+                <option value="evening">Evening</option>
+              </select>
+            </label>
+            <button class="btn primary" type="submit">Add Activity</button>
+          </form>
+        </star-border>
+      </div>
+    </section>
+
+    <section id="meals" class="section">
+      <div class="section__header">
+        <div>
+          <p class="eyebrow">Section 03</p>
+          <h2>Meal Planner</h2>
+        </div>
+        <p class="total-calories">Daily total: <span id="dailyCalories">0</span> kcal</p>
+      </div>
+      <div class="meal-grid" id="mealGrid"></div>
+      <star-border thickness="2" color="#0ff" speed="4s">
+        <form class="card meal-form reveal" id="mealForm" novalidate>
+          <h3>Add Meal Item</h3>
+          <label>
+            Meal
+            <select name="meal" required>
+              <option value="">Select meal</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="snacks">Snacks</option>
+            </select>
+          </label>
+          <label>
+            Item Name
+            <input type="text" name="item" placeholder="Avocado Toast" required />
+          </label>
+          <label>
+            Calories
+            <input type="number" name="calories" min="30" max="1500" placeholder="220" required />
+          </label>
+          <button class="btn primary" type="submit">Add Meal</button>
+        </form>
+      </star-border>
+    </section>
+
+    <section id="insights" class="section">
+      <div class="section__header">
+        <div>
+          <p class="eyebrow">Section 04</p>
+          <h2>Insights & Summary</h2>
+        </div>
+        <div class="button-row">
+          <button class="btn ghost" id="downloadSummary">Download Summary</button>
+          <button class="btn danger" id="resetDashboard">Reset Dashboard</button>
+        </div>
+      </div>
+      <div class="insights-grid">
+        <star-border thickness="2" color="#0ff" speed="4s">
+          <article class="card reveal">
+            <header>
+              <h3>Weekly Calories</h3>
+              <span class="chip">kcal</span>
+            </header>
+            <div class="chart-shell">
+              <canvas id="weeklyCaloriesChart" aria-label="Weekly calories chart"></canvas>
+            </div>
+          </article>
+        </star-border>
+        <star-border thickness="2" color="#ff9b6a" speed="4s">
+          <article class="card reveal">
+            <header>
+              <h3>Meal Calorie Split</h3>
+              <span class="chip">kcal</span>
+            </header>
+            <div class="chart-shell">
+              <canvas id="mealCaloriesChart" aria-label="Meal calorie split chart"></canvas>
+            </div>
+          </article>
+        </star-border>
+        <star-border thickness="2" color="#7fb8ff" speed="4s">
+          <article class="card reveal">
+            <header>
+              <h3>Session Load</h3>
+              <span class="chip">mins/session</span>
+            </header>
+            <div class="session-chart" id="sessionChart" aria-live="polite"></div>
+          </article>
+        </star-border>
+        <star-border thickness="2" color="#0ff" speed="4s">
+          <article class="card highlight-card reveal">
+            <h3>Momentum Insights</h3>
+            <ul id="insightsList" class="insights-list"></ul>
+          </article>
+        </star-border>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="statusModal" aria-hidden="true" role="dialog">
+    <div class="modal__content">
+      <p id="modalMessage">Action completed</p>
+      <button class="btn primary" id="modalClose">Got it</button>
+    </div>
+  </div>
+
+  <div class="modal" id="confirmModal" aria-hidden="true" role="dialog">
+    <div class="modal__content">
+      <p id="confirmMessage">Are you sure?</p>
+      <div class="modal__actions">
+        <button class="btn ghost" id="confirmCancel">Cancel</button>
+        <button class="btn danger" id="confirmAccept">Yes, reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./data.js" defer></script>
+  <script src="./star-border.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>
